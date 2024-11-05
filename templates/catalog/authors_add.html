@@ -1,0 +1,17 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<h5>Добавить в БД атвора книги</h5>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row text-start">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <table class="table">
+                {{ form }}
+            </table>
+        </div>
+        <div class="row-2"></div>
+    </div>
+    <input type="submit" value="Сохранить">
+</form>
+{% endblock %}
