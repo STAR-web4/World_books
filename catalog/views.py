@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.http.response import HttpResponseNotFound
-from .models import Book, Author, BookInstance
+from .models import Author, BookInstance, Book
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
@@ -10,6 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 # Create your views here.
+
 def index(request):
     text_head = 'На нашем сайте вы можете получить книги в электронном виде'
     books = Book.objects.all()
@@ -34,7 +35,7 @@ class BookListView(ListView):
 
 class BookDetailView(DetailView):
     model = Book
-    context_object_name = 'book'
+    context_object_name = ('book')
 
 
 class AuthorListView(ListView):
@@ -120,10 +121,10 @@ def delete(request, id):
         return HttpResponseNotFound('<h2>Автор не найден</h2>')
 
 
-def edit_author(request, id):
-    author = Author.objects.get(id=id)
+def edit_author(request, pk):
+    author = Author.objects.get(pk=pk)
     if request.method == 'POST':
-        instance = Author.objects.get(pk=id)
+        instance = Author.objects.get(pk=pk)
         form = Form_edit_author(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             form.save()
@@ -152,6 +153,10 @@ class BookUpdate(UpdateView):  # template_name_suffix -> book_form.html
     success_url = reverse_lazy('edit_books')
 
 
-class BookDelete(DeleteView):  # model_name_confirm_delete.html  -> book_confirm_delete.html
+class BookDelete(DeleteView):  # model_name_confirm_delete.html -> book_confirm_delete.html
     model = Book
     success_url = reverse_lazy('edit_books')
+
+
+def book_add(request, pk):
+    book = BookInstance.objects.get(pk=pk)

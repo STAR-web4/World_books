@@ -42,7 +42,7 @@ class Author(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=200, help_text="Введите название книги", verbose_name="Название книги")
-    genre = models.ForeignKey('genre', on_delete=models.CASCADE, help_text="Введите жанр для книги",
+    genre = models.ForeignKey('Genre', on_delete=models.CASCADE, help_text="Введите жанр для книги",
                               verbose_name="Жанр книги", null=True)
     language = models.ForeignKey('Language', on_delete=models.CASCADE, help_text="Введите язык книги",
                                  verbose_name="Язык книги", null=True)

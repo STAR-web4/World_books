@@ -27,12 +27,19 @@
     {% if num_books > 0 %}
     <div class="row my-2">
         {% for obj in books %}
-            <div class="card" style="width: 9rem;">
+            <div class="card mx-1" style="width: 12rem;">
                 <img src="{{ obj.photo.url }}" class="card-img-top">
                 <div class="card-body">
-                    <p class="card-text small">
-                        {{ obj.title }}, Цена:{{ obj.price }} руб.
+                    <p class="card-title">
+                        {{ obj.title }}
                     </p>
+                    <p class="card-text">
+                        Цена:{{ obj.price }} руб.
+                    </p>
+                    <div class="card-text">
+                        <a href="books/{{ obj.id }}" class="btn btn-primary">Подробней</a>
+                        <a href="" class="btn btn-primary mt-2">В корзину</a>
+                    </div>
                 </div>
             </div>
         {% endfor %}
